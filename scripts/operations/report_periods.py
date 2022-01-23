@@ -44,7 +44,7 @@ def generate_report_periods():
         ingresos = (total_base, total_taxes, total_amount)
         summary.append((ingresos, gastos, ingresos[2] - gastos[2]))
         
-    output_file = os.path.join(configuration.get_outputs_directory(), "report_periods.txt")
+    output_file = os.path.join(configuration.get_outputs_directory(), "informe_periodos.txt")
     with open(output_file, "w") as f:
         
         total_expenses = 0.
