@@ -51,8 +51,12 @@ Rellenar 130:
 
 ## Referencias
 
+* https://tuspapelesautonomos.es/tienda/
 * https://consultoriablogger.com/descarga-gratis-los-nuevos-formatos-de-libros-contables
 * https://getquipu.com/blog/como-rellenar-el-modelo-130-irpf
+* https://getquipu.com/blog/casillas-5-y-6-modelo-130-irpf/
+* https://tuspapelesautonomos.es/modelo-130-casilla-15-que-se-pone/
+* https://tuspapelesautonomos.es/tengo-obligacion-de-presentar-el-modelo-130-que-es/
 * https://tuspapelesautonomos.es/servicio
 * https://blog.contasimple.com/2021/02/formato-tipo-de-libros-registros-aeat/
 * https://blog.contasimple.com/2020/02/contabilidad-en-la-nube/
