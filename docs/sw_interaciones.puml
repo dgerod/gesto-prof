@@ -1,0 +1,5 @@
+@startuml
+
+[Scripts] -> [BD]
+
+@enduml

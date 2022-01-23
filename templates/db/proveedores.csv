@@ -1,0 +1,4 @@
+NÚMERO PROVEEDOR;NOMBRE;PRIMER APELLIDO;SEGUNDO APELLIDO;PERSONA FÍSICA / JURÍDICA;TIF;NIF;PAÍS;PROVINCIA;POBLACIÓN;CP;TIPO VÍA;NOMBRE VÍA;ŃUMERO;PISO;ESCALERA;PUERTA;FORMA DE COBRO;Teléfono;OBSERVACIONES;
+P1Z;Empresa 1;;;Jurídica;CIF;B00000001;España;Valéncia;Valéncia;46010;Calle;Finlandia;;;;;;;;
+P2Z;Empresa 2;;;Jurídica;CIF;B00000002;España;Barcelona;Granollers;8400;Calle;Pallars;;;;;;;;
+P3Z;Cuota mensual autónomo;;;n.a.;;;;;;;;;;;;;;;;

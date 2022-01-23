@@ -1,0 +1,3 @@
+Fecha factura;Número cliente;Número factura;Operación;Concepto;Base imponible;Importe IVA;Importe retención;Importe recargo;Importe total;Importe pendiente;Estado;Observaciones
+2021-10-13;C2Z;2021-90;Factura simplificada;Prestaciones de servicios;10.00;0.00;0.00;0.00;10.00;0.00;Pagado;
+2021-10-18;C2Z;2021-91;Factura simplificada;Prestaciones de servicios;10.00;0.00;0.00;0.00;10.00;0.00;Pagado;

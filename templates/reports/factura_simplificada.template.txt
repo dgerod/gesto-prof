@@ -1,0 +1,10 @@
+$Empresa
+NIF: $NIF
+
+Factura simplificada: $NumeroFactura
+Fecha emisión: $FechaEmision
+Concepto: $Descripcion
+
+Importe base: $ImporteBase EUR
+IVA ($IVA%): $ImporteIVA
+Importe total: $ImporteTotal EUR
