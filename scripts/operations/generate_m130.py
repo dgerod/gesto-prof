@@ -36,6 +36,7 @@ def _generate_m130(incomes_without_taxes, expenses_without_taxes,
                  payed_previous_period, negative_results_previous_periods, output_file):
 
     withholding_irpf_previous_periods = 0. # No retenemos IRPF al ser profesor particular
+    deduct_due_to_previous_year = 0. # ¿?¿?¿?¿?
 
     # P1. Estimación directa
     # ------------------------
@@ -77,10 +78,15 @@ def _generate_m130(incomes_without_taxes, expenses_without_taxes,
     else:
         C12 = 0.
 
-    C13 = 0. # No aplicable
+    C13 = deduct_due_to_previous_year
 
     C14 = C12 - C13
-    C15 = negative_results_previous_periods
+    
+    if C14 > 0.0:
+        C15 = negative_results_previous_periods
+    else:
+        C15 = 0.
+
     C16 = 0. # Ninguna deducción por vivienda habitual
     C17 = C14 - C15 - C16
 
@@ -110,12 +116,12 @@ def _generate_m130(incomes_without_taxes, expenses_without_taxes,
 
         f.write("III. Total liquidación.\n")
         f.write("----------------------------------------------------------\n")
-        f.write("   - Suma de pagos fraccionados del primer trimestre (12): %f\n" % C12)
+        f.write("   - Suma de pagos fraccionados prevíos del trimestre (12): %f\n" % C12)
         f.write("   - A deducir: Minoración por aplicación... (13): %f\n" % C13)
         f.write("   - Diferencia (14): %f\n" % C14)
         f.write("   - A deducir de  los periodos anteriores:\n")
         f.write("      - Resultados negativos de los periodos anteriores (15): %f\n" % C15)
-        f.write("      - Adquisicón o rehabilitación de vivienda habitual (16): %f\n"% C16)
+        f.write("      - Adquisición o rehabilitación de vivienda habitual (16): %f\n"% C16)
         f.write("   - Total (17): %f\n" % C17)
         f.write("   - A deducir (autoliquidación complementaria)\n")
         f.write("      - Resultado a ingresar anteriores autoliquidaciones (18): %f\n" % C18)
