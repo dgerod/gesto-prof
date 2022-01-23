@@ -1,8 +1,10 @@
 import os
 from scripts.common.configuration import Configuration
-from scripts.common.db import DataBase
-from scripts.common.invoices import ExpensesLoader
 
 
 def show_information():
-    pass
+
+    configuration = Configuration()
+    print("Base de datos: %s" % configuration.get_db_directory())
+    print("Entradas: %s" % configuration.get_inputs_directory())
+    print("Salidas: %s" % configuration.get_outputs_directory())
