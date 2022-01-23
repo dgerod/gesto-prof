@@ -16,19 +16,22 @@ class Configuration:
     def __init__(self):
 
         self._work_directory = self._find_directory()
+        
         self._configuration_file = os.path.join(self._work_directory, self._SETTINGS_FILE)
         self._tmp_directory = os.path.join(self._work_directory, self._TEMP_DIRECTORY)
-
-        self._data_directory, self._inputs_directory, \
-            self._output_directory = self._load_directories()
-
         self._templates_directory = self._TEMPLATES_DIRECTORY
+        
+        db_directory, inputs_directory, output_directory = self._load_directories()
+
+        self._db_directory = os.path.join(self._work_directory, db_directory, 'gp-db')
+        self._inputs_directory = os.path.join(self._work_directory, inputs_directory)
+        self._output_directory = os.path.join(self._work_directory, output_directory)
 
     def get_temp_directory(self):
         return self._tmp_directory
     
     def get_db_directory(self):
-        return os.path.join(self._data_directory, 'gp-db')
+        return self._db_directory
 
     def get_outputs_directory(self):
         return self._output_directory
@@ -47,14 +50,14 @@ class Configuration:
         with open(self._configuration_file, 'r') as stream:
             try:
                 data = yaml.safe_load(stream)
-                data_directory = data['db_path']
+                db_directory = data['db_path']
                 inputs_directory = data['inputs_dir']
                 output_directory = data['output_dir']
 
             except yaml.YAMLError as ex:
                 raise
     
-        return data_directory, inputs_directory, output_directory
+        return db_directory, inputs_directory, output_directory
 
     def _find_directory(self):
         """
