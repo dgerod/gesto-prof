@@ -1,12 +1,12 @@
 from datetime import date
 
 
-def generate_periods():
+def generate_periods(year):
 
-    T1 = (date(2021,1,1), date(2021,3,31))
-    T2 = (date(2021,4,1), date(2021,6,30))
-    T3 = (date(2021,7,1), date(2021,9,30))
-    T4 = (date(2021,10,1), date(2021,12,31))
+    T1 = (date(year,1,1), date(year,3,31))
+    T2 = (date(year,4,1), date(year,6,30))
+    T3 = (date(year,7,1), date(year,9,30))
+    T4 = (date(year,10,1), date(year,12,31))
 
     return [T1, T2, T3, T4]
 

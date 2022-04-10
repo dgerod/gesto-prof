@@ -1,6 +1,22 @@
 import os
 from pathlib import Path
 import yaml
+import datetime
+
+
+def validate_year(text):
+
+    try:
+        datetime.datetime.strptime(text, '%Y')
+
+    except ValueError:
+        raise ValueError('Incorrect data for year')
+
+    return text
+
+
+def validate_directory(text):
+    return text
 
 
 class Configuration:
@@ -21,11 +37,15 @@ class Configuration:
         self._tmp_directory = os.path.join(self._work_directory, self._TEMP_DIRECTORY)
         self._templates_directory = self._TEMPLATES_DIRECTORY
         
-        db_directory, inputs_directory, output_directory = self._load_directories()
+        db_directory, inputs_directory, output_directory, year = self._load_directories()
 
-        self._db_directory = os.path.join(self._work_directory, db_directory, 'gp-db')
+        self._db_directory = os.path.join(self._work_directory, db_directory, year, 'gp-db')
         self._inputs_directory = os.path.join(self._work_directory, inputs_directory)
         self._output_directory = os.path.join(self._work_directory, output_directory)
+        self._year = int(year)
+        
+    def get_year(self):
+        return self._year
 
     def get_temp_directory(self):
         return self._tmp_directory
@@ -48,16 +68,18 @@ class Configuration:
             raise NotADirectoryError('No existe el fichero de configuration')
             
         with open(self._configuration_file, 'r') as stream:
+
             try:
                 data = yaml.safe_load(stream)
-                db_directory = data['db_path']
-                inputs_directory = data['inputs_dir']
-                output_directory = data['output_dir']
-
+                db_directory = validate_directory(data['db_path'])
+                inputs_directory = validate_directory(data['inputs_dir'])
+                output_directory = validate_directory(data['output_dir'])
+                year = validate_year(data['year'])
+                
             except yaml.YAMLError as ex:
                 raise
     
-        return db_directory, inputs_directory, output_directory
+        return db_directory, inputs_directory, output_directory, year
 
     def _find_directory(self):
         """

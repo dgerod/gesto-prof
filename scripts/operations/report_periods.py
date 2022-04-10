@@ -12,7 +12,7 @@ def generate_report_periods():
     expenses = db.retrieve_expenses()
     incomes = db.retrieve_incomes()
 
-    periods = taxes_periods.generate_periods()
+    periods = taxes_periods.generate_periods(configuration.get_year())
     summary = []
 
     for d in periods:

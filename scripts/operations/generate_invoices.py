@@ -22,7 +22,7 @@ def generate_simplified_invoices(file_name: str):
     company_name, company_nif = db.get_company_information()
     
     num_invoices = 0
-    periods = taxes_periods.generate_periods()
+    periods = taxes_periods.generate_periods(configuration.get_year())
     for tdx in range(0, len(periods)):
 
         start_date = pd.to_datetime(periods[tdx][0])
@@ -82,7 +82,7 @@ def export_simplified_invoices():
     company_name, company_nif = db.get_company_information()
     
     num_invoices = 0
-    periods = taxes_periods.generate_periods()
+    periods = taxes_periods.generate_periods(configuration.get_year())
     for tdx in range(0, len(periods)):
 
         start_date = pd.to_datetime(periods[tdx][0])

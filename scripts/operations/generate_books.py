@@ -10,7 +10,7 @@ def generate_incomes_book():
     configuration = Configuration()
     db = DataBase(configuration.get_db_directory())
     incomes = db.retrieve_incomes()
-    periods = taxes_periods.generate_periods()
+    periods = taxes_periods.generate_periods(configuration.get_year())
 
     book_entries = []
     for index, row in incomes.iterrows():
@@ -53,7 +53,7 @@ def generate_expenses_book():
     configuration = Configuration()
     db = DataBase(configuration.get_db_directory())
     expenses = db.retrieve_expenses()
-    periods = taxes_periods.generate_periods()
+    periods = taxes_periods.generate_periods(configuration.get_year())
 
     book_entries = []
     for index, row in expenses.iterrows():
