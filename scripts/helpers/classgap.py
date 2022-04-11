@@ -19,14 +19,13 @@ class LessonsIncomeLoader:
     @staticmethod
     def _load(file_path):
         
-        column_dates = ["Fecha"]
+        column_dates = ["FECHA"]
         
         column_types = {
             "NÚMERO CLIENTE" : str,
             "NOMBRE ESTUDIANTE" : str,
             "PRECIO PROFESOR" : str,
-            "PRECIO PROFESOR" : str,
-            "BASE IMPONIBLE" : str,
+            "PRECIO PROMOCIÓN" : str,
             "COMISIÓN" : str,
             "BENEFICIO PROFESOR" : str,
             "BENEFICIO CLASSGAP" : str}
@@ -40,16 +39,16 @@ class LessonsIncomeLoader:
         money = dict(zip(["€",","],["","."]))
         percentage = dict(zip(["%",","],["","."]))
 
-        df["Fecha"] = pd.to_datetime(df["Fecha"]).dt.date
-        df["Precio Profesor"] = pd.to_numeric(df["Precio Profesor"].replace(
+        df["FECHA"] = pd.to_datetime(df["FECHA"]).dt.date
+        df["PRECIO PROFESOR"] = pd.to_numeric(df["PRECIO PROFESOR"].replace(
             money, regex=True))
-        df["Precio Promoción"] = pd.to_numeric(df["Precio Promoción"].replace(
+        df["PRECIO PROMOCIÓN"] = pd.to_numeric(df["PRECIO PROMOCIÓN"].replace(
             money, regex=True))
-        df["Comisión"] = pd.to_numeric(df["Comisión"].replace(
+        df["COMISIÓN"] = pd.to_numeric(df["COMISIÓN"].replace(
             percentage, regex=True))
-        df["Beneficio Profesor"] = pd.to_numeric(df["Beneficio Profesor"].replace(
+        df["BENEFICIO PROFESOR"] = pd.to_numeric(df["BENEFICIO PROFESOR"].replace(
             money, regex=True))
-        df["Beneficio Classgap"] = pd.to_numeric(df["Beneficio Classgap"].replace(
+        df["BENEFICIO CLASSGAP"] = pd.to_numeric(df["BENEFICIO CLASSGAP"].replace(
             money, regex=True))
 
         return df
@@ -59,8 +58,8 @@ class LessonsIncomeLoader:
         prices = []
         for index, row in df.iterrows():
 
-            professor_benefit = float(row["Beneficio Profesor"])
-            cg_benefit = float(row["Beneficio Classgap"])
+            professor_benefit = float(row["BENEFICIO PROFESOR"])
+            cg_benefit = float(row["BENEFICIO CLASSGAP"])
 
             if cg_benefit > 0.:
                 prices.append(professor_benefit + cg_benefit)
@@ -68,6 +67,6 @@ class LessonsIncomeLoader:
                 prices.append(professor_benefit)
 
         corrected_income = df.copy(True)
-        corrected_income['Precio Factura'] = prices
+        corrected_income['PRECIO FACTURA'] = prices
 
         return corrected_income
