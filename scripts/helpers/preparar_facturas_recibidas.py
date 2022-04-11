@@ -11,17 +11,14 @@ from scripts.common.configuration import Configuration
 configuration = Configuration()
 file_path = os.path.join(configuration.get_inputs_directory(), "classgap_facturas_recibidas.csv")
 
-# Columnas "classgap_facturas_recibidas.csv"
-# Factura	Serie	Tipo	Fecha	CIF	IdCliente	IdProducto	Nombre	NombreComercial	Provincia	Base	IVA	Total	Periodicidad	Status	Asesor
-
 column_dates = ["Fecha"]
 
 column_types = {
     "Factura" : str,
     "Serie" : str,
-    "Base" : str,
-    "IVA" : str,
-    "Total" : str}
+    "Base" : float,
+    "IVA" : float,
+    "Total" : float}
 
 classgap_data = pd.read_csv(file_path, sep=";", decimal=".",
                    parse_dates=column_dates, dtype=column_types)
@@ -38,9 +35,10 @@ data["NÚMERO FACTURA"] = classgap_data["Serie"] + "-" + classgap_data["Factura"
 data["OPERACIÓN"] = ["Factura Recibida"] * num_rows
 data["CONCEPTO"] = ["Otros Servicios"] * num_rows
 data["IMPORTE BASE"] = classgap_data["Base"]
-data["IMPORTE IVA"] = classgap_data["IVA"]
+data["% IVA"] = classgap_data["IVA"]
+data["IMPORTE IVA"] = classgap_data["Total"] - classgap_data["Base"]
+data["% RETENCIÓN"] = [0.0] * num_rows
 data["IMPORTE RETENCIÓN"] = [0.0] * num_rows
-data["IMPORTE RECARGO"] = [0.0] * num_rows
 data["IMPORTE TOTAL"] = classgap_data["Total"]
 data["IMPORTE PENDIENTE"] = [0.0] * num_rows
 data["ESTADO"] =  ["Pagado"] * num_rows
@@ -49,5 +47,5 @@ data["OBSERVACIONES"] = [""] * num_rows
 df = pd.DataFrame(data)
 print(data)
 
-file_path = os.path.join(configuration.get_outputs_directory(), "facturas_recibidas.csv")
+file_path = os.path.join(configuration.get_outputs_directory(), "facturas_recibidas_solo_classgap.csv")
 df.to_csv(file_path, index=False, sep=";", decimal=".")
