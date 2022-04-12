@@ -22,25 +22,25 @@ def main():
 def show():
     
     show_information()
-    
+
 
 @main.command(name='crear_facturas')
-@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas emitidas')
+@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas emitidas a leer')
 def make_invoices_from_file(file_path):
     """
     Crear las facturas emitidas a partir del fichero que se indica. En caso 
-    que no se pase un fichero, lo va a buscar al directory e entradas con el nombre 
-    'factura_recibidas.csv'.
+    que no se pase un fichero, lo va a buscar al directory de entradas con el nombre 
+    'facturas_emitidas.csv'.
     """
 
     if file_path == '':
         generate_simplified_invoices('facturas_emitidas.csv')
     else:
-        raise NotImplementedError
+        generate_simplified_invoices(os.path.abspath(file_path))
 
 
 @main.command(name='incorporar_gastos')
-@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas recibidas')
+@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas recibidas a leer')
 def add_expenses_to_db(file_path):
     """
     Añadir facturas recibidas a la base de datos. En caso que no se pase un 
@@ -50,11 +50,11 @@ def add_expenses_to_db(file_path):
     if file_path == '':
         add_expenses('facturas_recibidas.csv')
     else:
-        raise NotImplementedError
+        add_expenses(os.path.abspath(file_path))
 
 
 @main.command(name='incorporar_ingresos')
-@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas emitidas')
+@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero CSV de facturas emitidas a leer')
 def add_incomes_to_db(file_path):
     """
     Añadir facturas emitidas a la base de datos. En caso que no se pase un 
@@ -64,27 +64,28 @@ def add_incomes_to_db(file_path):
     if file_path == '':
         add_incomes('facturas_emitidas.csv')
     else:
-        raise NotImplementedError
+        add_incomes(os.path.abspath(file_path))
 
 
 @main.command(name='crear_informe')
 @click.argument('periodo', type=str, default='total')
 @click.option('-a', '--acumulado', 'accumulated', type=bool, default=False, help='Incluir periodos anteriores o no')
-def make_report_from_db(periodo, accumulated):
+@click.option('-d', '--directorio', 'directory_path', type=str, default='', help='Ruta al directory de salida')
+def make_report_from_db(periodo, accumulated, directory_path):
     """
     Crear un informe de un PERIODO determinado a partir de la información en
     la base de datos. En caso que no se pase un directorio lo escribe en el directorio de salidas
     con el nombre 'informe_periodos.txt'.
     """
 
-    if periodo in ['total']:
+    if periodo in ['total'] and directory_path == '':
         generate_report_periods()
     else:
         raise NotImplementedError
 
 
 @main.command(name='preparar_m130')
-@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero yaml con los datos')
+@click.option('-f', '--fichero', 'file_path', type=str, default='', help='Ruta al fichero yaml con los datos a leer')
 @click.option('-d', '--directorio', 'directory_path', type=str, default='', help='Ruta al directory de salida')
 def calculate_m130(file_path, directory_path):
     """
@@ -94,8 +95,10 @@ def calculate_m130(file_path, directory_path):
     'calculo_modelo_130.txt'.
     """
 
-    if file_path == '':
+    if file_path == '' and directory_path == '':
         generate_m130('modelo_130_datos.yaml')
+    elif file_path != '' and directory_path == '':
+        generate_m130(os.path.abspath(file_path))
     else:
         raise NotImplementedError
 

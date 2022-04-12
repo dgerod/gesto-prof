@@ -1,21 +1,19 @@
-# Modelo 130 de Agencia Tributaria de España
-
 import os
+import yaml
 from scripts.common.configuration import Configuration
 
-#    incomes_without_taxes = 1146.45
-#    expenses_without_taxes = 2164.73
-#    payed_previous_period = 20.28
-#    negative_results_previous_periods = 296.07
 
-def generate_m130(file_name):
+def generate_m130(file_path):
 
     configuration = Configuration()    
-    file_path = os.path.join(configuration.get_inputs_directory(),
-                             file_name)
+
+    if os.path.dirname(file_path) == "":
+        abs_file_path = os.path.join(configuration.get_inputs_directory(),
+                                     file_path)
+    else:
+        abs_file_path = os.path.abspath(file_path)
                              
-    import yaml
-    with open(file_path, 'r') as stream:
+    with open(abs_file_path, 'r') as stream:
         try:
             data = yaml.safe_load(stream)
             incomes_without_taxes = data['ingresos']

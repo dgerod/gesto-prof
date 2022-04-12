@@ -5,7 +5,7 @@ from scripts.common.db import DataBase
 from scripts.common import periods as taxes_periods
 
 
-def generate_incomes_book():
+def _generate_incomes_book():
 
     configuration = Configuration()
     db = DataBase(configuration.get_db_directory())
@@ -48,7 +48,7 @@ def generate_incomes_book():
     file_path = os.path.join(configuration.get_outputs_directory(), "libro_ventas_e_ingresos.csv")
     df.to_csv(file_path, index=False, sep=";", decimal=".")
 
-def generate_expenses_book():
+def _generate_expenses_book():
 
     configuration = Configuration()
     db = DataBase(configuration.get_db_directory())
@@ -92,6 +92,7 @@ def generate_expenses_book():
     file_path = os.path.join(configuration.get_outputs_directory(), "libro_compras_y_gastos.csv")
     df.to_csv(file_path, index=False, sep=";", decimal=".")
 
+
 def export_books():
-    generate_incomes_book()
-    generate_expenses_book()
+    _generate_incomes_book()
+    _generate_expenses_book()

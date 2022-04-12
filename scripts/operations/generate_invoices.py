@@ -8,15 +8,18 @@ from scripts.common import periods as taxes_periods
 from scripts.common.invoices import IncomesLoader
 
 
-def generate_simplified_invoices(file_name: str):
+def generate_simplified_invoices(file_path: str):
 
     configuration = Configuration()
     db = DataBase(configuration.get_db_directory())
 
-    file_path = os.path.join(configuration.get_inputs_directory(),
-                             file_name)
+    if os.path.dirname(file_path) == "":
+        abs_file_path = os.path.join(configuration.get_inputs_directory(),
+                                     file_path)
+    else:
+        abs_file_path = os.path.abspath(file_path)
 
-    new_incomes = IncomesLoader(file_path).incomes()
+    new_incomes = IncomesLoader(abs_file_path).incomes()
     incomes = new_incomes._df
 
     company_name, company_nif = db.get_company_information()
