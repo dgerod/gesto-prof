@@ -40,9 +40,11 @@ En el libro de ventas e ingresos existen multiple campos entre ellos:
 
 Es acumulativo, en el T4 está la información de los trimestres anteriores. Se usa los ingresos y gastos sin IVA para rellenar este modelo
 
+```
 beneficio = ingresos - gastos 
 gastos extra = 5% beneficios (max 2000 año)
 gastos totales = gastos + gastos extra
+```
 
 Rellenar 130:
 	beneficio
