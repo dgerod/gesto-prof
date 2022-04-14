@@ -46,11 +46,6 @@ gastos extra = 5% beneficios (max 2000 año)
 gastos totales = gastos + gastos extra
 ```
 
-Rellenar 130:
-	beneficio
-	gastos totales
-	20% de (beneficio - gastos totales)
-
 ## Referencias
 
 * https://tuspapelesautonomos.es/tienda/
