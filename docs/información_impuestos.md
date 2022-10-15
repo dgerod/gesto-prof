@@ -32,7 +32,7 @@ Hay tres libros:
 
 Los dos primeros son obligatorios, sin embargo el tercero solo hay que hacerlo en caso que compres cosas para la empresa, como por ejemplo un ordenador.
 
-El libro de ventas e ingresos existen multiple campos entre ellos:
+En el libro de ventas e ingresos existen multiple campos entre ellos:
 * Los campo "tipo retención" e "IMPORTE RETENCIÓN" se refieren al IRPF retenido con la factura. 
 * Mientras los relacionados con "RECARGO EQUIVALENCIA" esta relacionados con el IVA. El recargo de equivalencia es un tipo de régimen especial de IVA que y no se aplica nunca a actividades de servicios entre otras.
 
@@ -40,14 +40,11 @@ El libro de ventas e ingresos existen multiple campos entre ellos:
 
 Es acumulativo, en el T4 está la información de los trimestres anteriores. Se usa los ingresos y gastos sin IVA para rellenar este modelo
 
+```
 beneficio = ingresos - gastos 
 gastos extra = 5% beneficios (max 2000 año)
 gastos totales = gastos + gastos extra
-
-Rellenar 130:
-	beneficio
-	gastos totales
-	20% de (beneficio - gastos totales)
+```
 
 ## Referencias
 
