@@ -9,7 +9,7 @@ from scripts.common.configuration import Configuration
 
 
 configuration = Configuration()
-file_path = os.path.join(configuration.get_inputs_directory(), "classgap_facturas_recibidas.csv")
+file_path = os.path.join(configuration.get_inputs_directory(), "classgap_servicio_facturas.csv")
 
 column_dates = ["Fecha"]
 
@@ -45,7 +45,7 @@ data["ESTADO"] =  ["Pagado"] * num_rows
 data["OBSERVACIONES"] = [""] * num_rows
 
 df = pd.DataFrame(data)
-print(data)
+#print(data)
 
 file_path = os.path.join(configuration.get_outputs_directory(), "facturas_recibidas_solo_classgap.csv")
 df.to_csv(file_path, index=False, sep=";", decimal=".")
